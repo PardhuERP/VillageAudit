@@ -1,0 +1,67 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    color:#222;
+}
+
+header{
+    background:#2563eb;
+    color:#fff;
+    padding:20px;
+    text-align:center;
+    border-radius:0 0 20px 20px;
+}
+
+#villageInfo{
+    margin-top:10px;
+    font-size:15px;
+}
+
+.filters{
+    display:flex;
+    gap:10px;
+    padding:15px;
+}
+
+.filters select{
+    flex:1;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:15px;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:18px;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+.card h2{
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#666;
+    font-size:14px;
+}
