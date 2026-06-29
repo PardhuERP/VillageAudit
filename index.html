@@ -1,98 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Village Audit Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Village Audit Dashboard</title>
 
-<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
-<footer style="text-align:center;padding:20px;color:#777;">
-Village Audit Dashboard v1.0
-</footer>
 
 <body>
 
 <header>
 
-<h1>Village Audit Dashboard</h1>
+    <h1>🏛 Village Audit Dashboard</h1>
 
-<div id="villageInfo">
+    <div id="villageInfo">
 
-<div>Ippagunta</div>
+        <h2 id="village">Loading...</h2>
 
-<div>Ponnaluru | Prakasam</div>
+        <p>
+            <span id="block">Loading...</span> |
+            <span id="district">Loading...</span>
+        </p>
 
-</div>
+    </div>
 
 </header>
 
-
 <section class="filters">
 
-<select id="year">
+    <select id="year">
+        <option>2025-26</option>
+        <option>2024-25</option>
+        <option>2023-24</option>
+        <option>2022-23</option>
+    </select>
 
-<option>2025-26</option>
-<option>2024-25</option>
-<option>2023-24</option>
-<option>2022-23</option>
-
-</select>
-
-
-<select id="scheme">
-
-<option>XVFC</option>
-
-<option>OWN</option>
-
-<option>MGNREGA</option>
-
-<option>SBM</option>
-
-</select>
+    <select id="scheme">
+        <option>XVFC</option>
+        <option>OWN</option>
+        <option>MGNREGA</option>
+        <option>SBM</option>
+    </select>
 
 </section>
-
-
 
 <section class="cards">
 
-<div class="card" onclick="location.href='pages/finance.html'">
-    <h2>💰 Finance</h2>
-    <p>Payments, Receipts, Expenditure</p>
-</div>
+    <div class="card" onclick="location.href='pages/finance.html'">
+        <h2>💰 Finance</h2>
+        <p>Payments, Receipts, Expenditure</p>
+    </div>
 
-<div class="card" onclick="location.href='pages/development.html'">
-    <h2>🛣 Development</h2>
-    <p>Roads, Water, Drainage</p>
-</div>
+    <div class="card" onclick="location.href='pages/development.html'">
+        <h2>🛣 Development</h2>
+        <p>Roads, Water, Drainage</p>
+    </div>
 
-<div class="card" onclick="location.href='pages/assets.html'">
-    <h2>🏛 Assets</h2>
-    <p>Village Assets Register</p>
-</div>
+    <div class="card" onclick="location.href='pages/assets.html'">
+        <h2>🏛 Assets</h2>
+        <p>Village Assets Register</p>
+    </div>
 
-<div class="card" onclick="location.href='pages/tenders.html'">
-    <h2>📑 Tenders</h2>
-    <p>Work Orders & Contractors</p>
-</div>
+    <div class="card" onclick="location.href='pages/tenders.html'">
+        <h2>📑 Tenders</h2>
+        <p>Work Orders & Contractors</p>
+    </div>
 
-<div class="card" onclick="location.href='pages/reports.html'">
-    <h2>📊 Reports</h2>
-    <p>Audit Reports & Export</p>
-</div>
+    <div class="card" onclick="location.href='pages/reports.html'">
+        <h2>📊 Reports</h2>
+        <p>Audit Reports & Export</p>
+    </div>
 
-<div class="card" onclick="location.href='pages/settings.html'">
-    <h2>⚙ Settings</h2>
-    <p>Village Configuration</p>
-</div>
+    <div class="card" onclick="location.href='pages/settings.html'">
+        <h2>⚙ Settings</h2>
+        <p>Village Configuration</p>
+    </div>
 
 </section>
 
+<footer style="text-align:center;padding:20px;color:#777;">
+    Village Audit Dashboard v1.0
+</footer>
 
 <script src="js/app.js"></script>
+<script src="js/api.js"></script>
+
+<script>
+
+async function loadConfig(){
+
+    try{
+
+        const config = await getConfig();
+
+        document.getElementById("village").innerText = config["Village"];
+        document.getElementById("block").innerText = config["Block"];
+        document.getElementById("district").innerText = config["District"];
+
+    }catch(error){
+
+        console.error(error);
+        alert(error);
+
+    }
+
+}
+
+loadConfig();
+
+</script>
 
 </body>
 
