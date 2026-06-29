@@ -7,5 +7,24 @@
 
 <h1>Finance Module</h1>
 
+  
+<script src="../js/api.js"></script>
+
+<script>
+
+async function load(){
+
+const config=await getConfig();
+
+document.getElementById("village").innerText=config.Village;
+document.getElementById("block").innerText=config.Block;
+document.getElementById("district").innerText=config.District;
+
+}
+
+load();
+
+</script>
+  
 </body>
 </html>
