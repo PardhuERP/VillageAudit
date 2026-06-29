@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Payment Entry</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<h2>Payment Voucher Entry</h2>
+
+<input type="date" id="date"><br><br>
+
+<select id="year">
+<option>2025-26</option>
+<option>2024-25</option>
+</select><br><br>
+
+<select id="scheme">
+<option>XVFC</option>
+<option>OWN</option>
+<option>MGNREGA</option>
+</select><br><br>
+
+<input type="number" id="amount" placeholder="Amount"><br><br>
+
+<input type="text" id="paidTo" placeholder="Paid To"><br><br>
+
+<input type="text" id="particulars" placeholder="Particulars"><br><br>
+
+<select id="voucherType">
+<option>Payment</option>
+<option>Receipt</option>
+</select><br><br>
+
+<button onclick="saveVoucher()">Save Voucher</button>
+
+<script src="../js/payment.js"></script>
+
+</body>
+</html>
