@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master Sync</title>
+
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<h2>🌍 Master Data Sync</h2>
+
+<div class="card">
+
+<button onclick="syncStates()">🏛 Sync States</button>
+
+<p id="statesStatus">Waiting...</p>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<button onclick="syncDistricts()">🏢 Sync Districts</button>
+
+<p id="districtStatus">Waiting...</p>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<button onclick="syncBlocks()">🏘 Sync Blocks</button>
+
+<p id="blockStatus">Waiting...</p>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<button onclick="syncGP()">🏠 Sync Gram Panchayats</button>
+
+<p id="gpStatus">Waiting...</p>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<button onclick="syncVillages()">🌾 Sync Villages</button>
+
+<p id="villageStatus">Waiting...</p>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<button onclick="syncAll()">🚀 Sync Everything</button>
+
+<p id="allStatus">Ready</p>
+
+</div>
+
+<script src="../js/masterSync.js"></script>
+
+</body>
+</html>
