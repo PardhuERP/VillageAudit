@@ -24,19 +24,26 @@
 
   <script src="../js/api.js"></script>
 
-  <script>
-    async function load() {
 
-      const config = await getConfig();
 
-      document.getElementById("village").innerText = config.Village;
-      document.getElementById("block").innerText = config.Block;
-      document.getElementById("district").innerText = config.District;
+<script>
+async function load() {
+    try {
+        const config = await getConfig();
+        console.log(config);
 
+        document.getElementById("village").innerText = config["Village"];
+        document.getElementById("block").innerText = config["Block"];
+        document.getElementById("district").innerText = config["District"];
+
+    } catch (err) {
+        alert(err);
+        console.error(err);
     }
+}
 
-    load();
-  </script>
+load();
+</script>
 
 </body>
 
