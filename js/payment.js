@@ -1,5 +1,3 @@
-function openVoucher(){
-
-alert("Search Started");
-
+function saveVoucher() {
+    alert("Button Working");
 }
