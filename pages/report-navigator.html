@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Report Navigator</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+<h2>Report Navigator</h2>
+
+<label>Financial Year</label>
+
+<select id="year">
+<option value="2026-2027">2026-2027</option>
+<option value="2025-2026" selected>2025-2026</option>
+<option value="2024-2025">2024-2025</option>
+<option value="2023-2024">2023-2024</option>
+<option value="2022-2023">2022-2023</option>
+<option value="2021-2022">2021-2022</option>
+<option value="2020-2021">2020-2021</option>
+</select>
+
+<br><br>
+
+<label>Report</label>
+
+<select id="report">
+
+<option value="StateSummary">State Summary Report</option>
+
+</select>
+
+<br><br>
+
+<label>State Code</label>
+
+<input id="state" value="28">
+
+<br><br>
+
+<label>District Code</label>
+
+<input id="district" value="472">
+
+<br><br>
+
+<label>Block Code</label>
+
+<input id="block" value="5827">
+
+<br><br>
+
+<label>Village Code</label>
+
+<input id="village" value="235647">
+
+<br><br>
+
+<button onclick="openReport()">
+
+OPEN REPORT
+
+</button>
+
+<script src="../js/reportNavigator.js"></script>
+
+</body>
+
+</html>
