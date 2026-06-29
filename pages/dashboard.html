@@ -1,30 +1,43 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Village Audit Dashboard</title>
 </head>
+
 <body>
 
-<h1>Finance Module</h1>
+  <h1>Village Audit Dashboard</h1>
 
-  
-<script src="../js/api.js"></script>
+  <h2 id="village">Loading...</h2>
 
-<script>
+  <p>
+    <span id="block">Loading...</span> |
+    <span id="district">Loading...</span>
+  </p>
 
-async function load(){
+  <hr>
 
-const config=await getConfig();
+  <h3>Finance Module</h3>
 
-document.getElementById("village").innerText=config.Village;
-document.getElementById("block").innerText=config.Block;
-document.getElementById("district").innerText=config.District;
+  <script src="../js/api.js"></script>
 
-}
+  <script>
+    async function load() {
 
-load();
+      const config = await getConfig();
 
-</script>
-  
+      document.getElementById("village").innerText = config.Village;
+      document.getElementById("block").innerText = config.Block;
+      document.getElementById("district").innerText = config.District;
+
+    }
+
+    load();
+  </script>
+
 </body>
+
 </html>
