@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +12,7 @@
 
 <body>
 
-<h2>Report Navigator</h2>
+<h2>📊 Report Navigator</h2>
 
 <label>Financial Year</label>
 
@@ -30,16 +31,16 @@
 <label>Report</label>
 
 <select id="report">
-
 <option value="StateSummary">State Summary Report</option>
-
 </select>
 
 <br><br>
 
-<label>State Code</label>
+<label>State</label>
 
-<input id="state" value="28">
+<select id="state">
+<option>Loading...</option>
+</select>
 
 <br><br>
 
@@ -62,11 +63,10 @@
 <br><br>
 
 <button onclick="openReport()">
-
-OPEN REPORT
-
+🚀 OPEN REPORT
 </button>
 
+<script src="../js/report.js"></script>
 <script src="../js/reportNavigator.js"></script>
 
 </body>
