@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+<h2>⚙ Admin Dashboard</h2>
+
+<div class="card">
+
+<h3>Master Data</h3>
+
+<button onclick="syncStates()">Sync States</button>
+
+<button onclick="syncDistricts()">Sync Districts</button>
+
+<button onclick="syncSubDistricts()">Sync Sub Districts</button>
+
+<button onclick="syncAllStates()">Sync All State Villages</button>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<h3>Status</h3>
+
+<p id="status">Ready...</p>
+
+</div>
+
+<script src="../js/admin.js"></script>
+
+</body>
+
+</html>
