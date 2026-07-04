@@ -50,3 +50,29 @@ district.innerHTML+=`<option value="${d.code}">${d.name}</option>`;
 });
 
 }
+
+document.getElementById("district").addEventListener("change", function () {
+
+    loadSubDistricts(this.value);
+
+});
+
+async function loadSubDistricts(districtCode) {
+
+    const sub = document.getElementById("subdistrict");
+
+    sub.innerHTML = "<option>Loading...</option>";
+
+    const res = await fetch(API + "?action=getSubDistricts&district=" + districtCode);
+
+    const json = await res.json();
+
+    sub.innerHTML = "<option value=''>Select Sub District</option>";
+
+    json.data.forEach(s => {
+
+        sub.innerHTML += `<option value="${s.code}">${s.name}</option>`;
+
+    });
+
+}
