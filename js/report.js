@@ -198,3 +198,22 @@ window.onload = function () {
     loadStates();
 
 };
+
+function updateSelection() {
+
+    document.getElementById("selectedYear").innerText =
+        document.getElementById("year").value;
+
+    document.getElementById("selectedState").innerText =
+        state.options[state.selectedIndex].text;
+
+    document.getElementById("selectedDistrict").innerText =
+        district.options[district.selectedIndex].text;
+
+    document.getElementById("selectedSubDistrict").innerText =
+        subdistrict.options[subdistrict.selectedIndex].text;
+
+    document.getElementById("selectedVillage").innerText =
+        village.options[village.selectedIndex].text;
+
+}
