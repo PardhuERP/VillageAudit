@@ -1,19 +1,66 @@
 const API = "https://script.google.com/macros/s/AKfycby2PHdv3C9YFmZZ7akKazW5aqPX337oxcBwgVD65NpGC_5bUMSnLttaCmqSds0d6Yv_Eg/exec";
 
-window.onload = function () {
-    loadStates();
-};
+// ===============================
+// ELEMENTS
+// ===============================
 
-// =======================
+const state = document.getElementById("state");
+const district = document.getElementById("district");
+const subdistrict = document.getElementById("subdistrict");
+const village = document.getElementById("village");
+
+// ===============================
+// API
+// ===============================
+
+async function api(action, params = "") {
+
+    try {
+
+        const res = await fetch(API + "?action=" + action + params);
+
+        return await res.json();
+
+    } catch (e) {
+
+        console.error(e);
+
+        alert("Network Error");
+
+        return {
+            status: false,
+            data: []
+        };
+
+    }
+
+}
+
+// ===============================
+// RESET
+// ===============================
+
+function resetDistrict() {
+    district.innerHTML = "<option>Select District</option>";
+}
+
+function resetSubDistrict() {
+    subdistrict.innerHTML = "<option>Select Sub District</option>";
+}
+
+function resetVillage() {
+    village.innerHTML = "<option>Select Village</option>";
+}
+
+// ===============================
 // STATES
-// =======================
+// ===============================
 
 async function loadStates() {
 
-    const res = await fetch(API + "?action=getStates");
-    const json = await res.json();
+    const json = await api("getStates");
 
-    const state = document.getElementById("state");
+    if (!json.status) return;
 
     state.innerHTML = "<option value=''>Select State</option>";
 
@@ -26,33 +73,18 @@ async function loadStates() {
 
 }
 
-// =======================
+// ===============================
 // DISTRICTS
-// =======================
-
-document.getElementById("state").addEventListener("change", function () {
-
-    document.getElementById("subdistrict").innerHTML =
-        "<option>Select District First</option>";
-
-    document.getElementById("village").innerHTML =
-        "<option>Select Sub District First</option>";
-
-    loadDistricts(this.value);
-
-});
+// ===============================
 
 async function loadDistricts(stateCode) {
 
-    const district = document.getElementById("district");
-
-    district.innerHTML = "<option>Loading...</option>";
-
-    const res = await fetch(
-        API + "?action=getDistricts&state=" + stateCode
+    const json = await api(
+        "getDistricts",
+        "&state=" + stateCode
     );
 
-    const json = await res.json();
+    if (!json.status) return;
 
     district.innerHTML =
         "<option value=''>Select District</option>";
@@ -66,69 +98,44 @@ async function loadDistricts(stateCode) {
 
 }
 
-// =======================
+// ===============================
 // SUB DISTRICTS
-// =======================
-
-document.getElementById("district").addEventListener("change", function () {
-
-    document.getElementById("village").innerHTML =
-        "<option>Select Sub District First</option>";
-
-    loadSubDistricts(this.value);
-
-});
+// ===============================
 
 async function loadSubDistricts(districtCode) {
 
-    const sub = document.getElementById("subdistrict");
-
-    sub.innerHTML = "<option>Loading...</option>";
-
-    const res = await fetch(
-        API + "?action=getSubDistricts&district=" + districtCode
+    const json = await api(
+        "getSubDistricts",
+        "&district=" + districtCode
     );
 
-    const json = await res.json();
+    if (!json.status) return;
 
-    sub.innerHTML =
+    subdistrict.innerHTML =
         "<option value=''>Select Sub District</option>";
 
     json.data.forEach(s => {
 
-        sub.innerHTML +=
+        subdistrict.innerHTML +=
             `<option value="${s.code}">${s.name}</option>`;
 
     });
 
 }
 
-// =======================
+// ===============================
 // VILLAGES
-// =======================
-
-document.getElementById("subdistrict").addEventListener("change", function () {
-
-    const stateCode = document.getElementById("state").value;
-
-    loadVillages(stateCode, this.value);
-
-});
+// ===============================
 
 async function loadVillages(stateCode, subDistrictCode) {
 
-    const village = document.getElementById("village");
-
-    village.innerHTML = "<option>Loading...</option>";
-
-    const res = await fetch(
-        API +
-        "?action=getVillages" +
+    const json = await api(
+        "getVillages",
         "&state=" + stateCode +
         "&subdistrict=" + subDistrictCode
     );
 
-    const json = await res.json();
+    if (!json.status) return;
 
     village.innerHTML =
         "<option value=''>Select Village</option>";
@@ -141,3 +148,53 @@ async function loadVillages(stateCode, subDistrictCode) {
     });
 
 }
+
+// ===============================
+// EVENTS
+// ===============================
+
+state.addEventListener("change", function () {
+
+    resetDistrict();
+    resetSubDistrict();
+    resetVillage();
+
+    if (!this.value) return;
+
+    loadDistricts(this.value);
+
+});
+
+district.addEventListener("change", function () {
+
+    resetSubDistrict();
+    resetVillage();
+
+    if (!this.value) return;
+
+    loadSubDistricts(this.value);
+
+});
+
+subdistrict.addEventListener("change", function () {
+
+    resetVillage();
+
+    if (!this.value) return;
+
+    loadVillages(
+        state.value,
+        this.value
+    );
+
+});
+
+// ===============================
+// START
+// ===============================
+
+window.onload = function () {
+
+    loadStates();
+
+};
