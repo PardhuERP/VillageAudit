@@ -76,3 +76,29 @@ async function loadSubDistricts(districtCode) {
     });
 
 }
+
+async function loadVillages(stateCode, subDistrictCode) {
+
+    const village = document.getElementById("village");
+
+    village.innerHTML = "<option>Loading...</option>";
+
+    const res = await fetch(
+        API +
+        "?action=getVillages" +
+        "&state=" + stateCode +
+        "&subdistrict=" + subDistrictCode
+    );
+
+    const json = await res.json();
+
+    village.innerHTML = "<option value=''>Select Village</option>";
+
+    json.data.forEach(v => {
+
+        village.innerHTML +=
+            `<option value="${v.code}">${v.name}</option>`;
+
+    });
+
+}
