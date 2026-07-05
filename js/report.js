@@ -1,17 +1,18 @@
 const API = "https://script.google.com/macros/s/AKfycby2PHdv3C9YFmZZ7akKazW5aqPX337oxcBwgVD65NpGC_5bUMSnLttaCmqSds0d6Yv_Eg/exec";
 
-// ===============================
+// =======================================
 // ELEMENTS
-// ===============================
+// =======================================
 
+const year = document.getElementById("year");
 const state = document.getElementById("state");
 const district = document.getElementById("district");
 const subdistrict = document.getElementById("subdistrict");
 const village = document.getElementById("village");
 
-// ===============================
+// =======================================
 // API
-// ===============================
+// =======================================
 
 async function api(action, params = "") {
 
@@ -36,25 +37,25 @@ async function api(action, params = "") {
 
 }
 
-// ===============================
+// =======================================
 // RESET
-// ===============================
+// =======================================
 
 function resetDistrict() {
-    district.innerHTML = "<option>Select District</option>";
+    district.innerHTML = "<option value=''>Select District</option>";
 }
 
 function resetSubDistrict() {
-    subdistrict.innerHTML = "<option>Select Sub District</option>";
+    subdistrict.innerHTML = "<option value=''>Select Sub District</option>";
 }
 
 function resetVillage() {
-    village.innerHTML = "<option>Select Village</option>";
+    village.innerHTML = "<option value=''>Select Village</option>";
 }
 
-// ===============================
+// =======================================
 // STATES
-// ===============================
+// =======================================
 
 async function loadStates() {
 
@@ -73,9 +74,9 @@ async function loadStates() {
 
 }
 
-// ===============================
+// =======================================
 // DISTRICTS
-// ===============================
+// =======================================
 
 async function loadDistricts(stateCode) {
 
@@ -98,9 +99,9 @@ async function loadDistricts(stateCode) {
 
 }
 
-// ===============================
+// =======================================
 // SUB DISTRICTS
-// ===============================
+// =======================================
 
 async function loadSubDistricts(districtCode) {
 
@@ -123,9 +124,9 @@ async function loadSubDistricts(districtCode) {
 
 }
 
-// ===============================
+// =======================================
 // VILLAGES
-// ===============================
+// =======================================
 
 async function loadVillages(stateCode, subDistrictCode) {
 
@@ -149,15 +150,50 @@ async function loadVillages(stateCode, subDistrictCode) {
 
 }
 
-// ===============================
+// =======================================
+// SELECTED DETAILS
+// =======================================
+
+function updateSelection() {
+
+    document.getElementById("selectedYear").innerText =
+        year.value || "-";
+
+    document.getElementById("selectedState").innerText =
+        state.selectedIndex > 0
+            ? state.options[state.selectedIndex].text
+            : "-";
+
+    document.getElementById("selectedDistrict").innerText =
+        district.selectedIndex > 0
+            ? district.options[district.selectedIndex].text
+            : "-";
+
+    document.getElementById("selectedSubDistrict").innerText =
+        subdistrict.selectedIndex > 0
+            ? subdistrict.options[subdistrict.selectedIndex].text
+            : "-";
+
+    document.getElementById("selectedVillage").innerText =
+        village.selectedIndex > 0
+            ? village.options[village.selectedIndex].text
+            : "-";
+
+}
+
+// =======================================
 // EVENTS
-// ===============================
+// =======================================
+
+year.addEventListener("change", updateSelection);
 
 state.addEventListener("change", function () {
 
     resetDistrict();
     resetSubDistrict();
     resetVillage();
+
+    updateSelection();
 
     if (!this.value) return;
 
@@ -170,6 +206,8 @@ district.addEventListener("change", function () {
     resetSubDistrict();
     resetVillage();
 
+    updateSelection();
+
     if (!this.value) return;
 
     loadSubDistricts(this.value);
@@ -180,6 +218,8 @@ subdistrict.addEventListener("change", function () {
 
     resetVillage();
 
+    updateSelection();
+
     if (!this.value) return;
 
     loadVillages(
@@ -189,31 +229,16 @@ subdistrict.addEventListener("change", function () {
 
 });
 
-// ===============================
+village.addEventListener("change", updateSelection);
+
+// =======================================
 // START
-// ===============================
+// =======================================
 
-window.onload = function () {
+window.onload = async function () {
 
-    loadStates();
+    await loadStates();
+
+    updateSelection();
 
 };
-
-function updateSelection() {
-
-    document.getElementById("selectedYear").innerText =
-        document.getElementById("year").value;
-
-    document.getElementById("selectedState").innerText =
-        state.options[state.selectedIndex].text;
-
-    document.getElementById("selectedDistrict").innerText =
-        district.options[district.selectedIndex].text;
-
-    document.getElementById("selectedSubDistrict").innerText =
-        subdistrict.options[subdistrict.selectedIndex].text;
-
-    document.getElementById("selectedVillage").innerText =
-        village.options[village.selectedIndex].text;
-
-}
