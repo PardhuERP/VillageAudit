@@ -1,5 +1,6 @@
 const API = "https://script.google.com/macros/s/AKfycby2PHdv3C9YFmZZ7akKazW5aqPX337oxcBwgVD65NpGC_5bUMSnLttaCmqSds0d6Yv_Eg/exec";
 let reportTemplates = [];
+const report = document.getElementById("report");
 // =======================================
 // ELEMENTS
 // =======================================
@@ -150,6 +151,31 @@ async function loadVillages(stateCode, subDistrictCode) {
 
 }
 
+
+// =======================================
+// REPORT TYPES
+// =======================================
+
+async function loadReports() {
+
+    const json = await api("getReportTypes");
+
+    if (!json.status) return;
+
+    reportTemplates = json.data;
+
+    report.innerHTML =
+        "<option value=''>Select Report</option>";
+
+    json.data.forEach(r => {
+
+        report.innerHTML +=
+            `<option value="${r.id}">${r.name}</option>`;
+
+    });
+
+}
+
 // =======================================
 // SELECTED DETAILS
 // =======================================
@@ -178,6 +204,39 @@ function updateSelection() {
         village.selectedIndex > 0
             ? village.options[village.selectedIndex].text
             : "-";
+
+}
+
+
+// =======================================
+// REPORT URL
+// =======================================
+
+function generateUrl() {
+
+    const reportId = report.value;
+
+    if (!reportId) {
+
+        document.getElementById("generatedUrl").value = "";
+
+        return;
+
+    }
+
+    const template = reportTemplates.find(r => String(r.id) === String(reportId));
+
+    if (!template) return;
+
+    let url = template.url;
+
+    url = url.replace("{YEAR}", year.value);
+    url = url.replace("{STATE}", state.value);
+    url = url.replace("{DISTRICT}", district.value);
+    url = url.replace("{SUBDISTRICT}", subdistrict.value);
+    url = url.replace("{VILLAGE}", village.value);
+
+    document.getElementById("generatedUrl").value = url;
 
 }
 
@@ -229,7 +288,24 @@ subdistrict.addEventListener("change", function () {
 
 });
 
-village.addEventListener("change", updateSelection);
+
+village.addEventListener("change", function () {
+
+    updateSelection();
+
+    generateUrl();
+
+});
+
+report.addEventListener("change", generateUrl);
+
+year.addEventListener("change", generateUrl);
+
+state.addEventListener("change", generateUrl);
+
+district.addEventListener("change", generateUrl);
+
+subdistrict.addEventListener("change", generateUrl);
 
 // =======================================
 // START
@@ -239,6 +315,50 @@ window.onload = async function () {
 
     await loadStates();
 
+    await loadReports();
+
     updateSelection();
 
 };
+
+// =======================================
+// COPY URL
+// =======================================
+
+function copyUrl() {
+
+    const url = document.getElementById("generatedUrl").value;
+
+    if (!url) {
+
+        alert("No URL Generated");
+
+        return;
+
+    }
+
+    navigator.clipboard.writeText(url);
+
+    alert("URL Copied");
+
+}
+
+// =======================================
+// OPEN REPORT
+// =======================================
+
+function openReport() {
+
+    const url = document.getElementById("generatedUrl").value;
+
+    if (!url) {
+
+        alert("Generate URL First");
+
+        return;
+
+    }
+
+    window.open(url, "_blank");
+
+}
