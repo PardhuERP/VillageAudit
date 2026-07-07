@@ -222,7 +222,15 @@ function generateUrl() {
 
     const reportId = report.value;
 
-    if (!reportId) {
+    // Generate URL only after all selections are made
+    if (
+        !year.value ||
+        !state.value ||
+        !district.value ||
+        !subdistrict.value ||
+        !village.value ||
+        !reportId
+    ) {
 
         document.getElementById("generatedUrl").value = "";
 
@@ -230,9 +238,17 @@ function generateUrl() {
 
     }
 
-    const template = reportTemplates.find(r => String(r.id) === String(reportId));
+    const template = reportTemplates.find(
+        r => String(r.id) === String(reportId)
+    );
 
-    if (!template) return;
+    if (!template) {
+
+        document.getElementById("generatedUrl").value = "";
+
+        return;
+
+    }
 
     let url = template.url;
 
