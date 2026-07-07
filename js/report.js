@@ -224,19 +224,22 @@ function generateUrl() {
 
     // Generate URL only after all selections are made
     if (
-        !year.value ||
-        !state.value ||
-        !district.value ||
-        !subdistrict.value ||
-        !village.value ||
-        !reportId
-    ) {
+    !year.value ||
+    !state.value ||
+    !district.value ||
+    !subdistrict.value ||
+    !village.value ||
+    !reportId
+) {
 
-        document.getElementById("generatedUrl").value = "";
+    document.getElementById("generatedUrl").value = "";
 
-        return;
+    document.getElementById("reportStatus").innerHTML =
+        "🔴 Complete all selections";
 
-    }
+    return;
+
+}
 
     const template = reportTemplates.find(
         r => String(r.id) === String(reportId)
