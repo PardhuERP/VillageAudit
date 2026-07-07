@@ -97,6 +97,8 @@ async function loadDistricts(stateCode) {
             `<option value="${d.code}">${d.name}</option>`;
 
     });
+    updateSelection();
+generateUrl();
 
 }
 
@@ -122,6 +124,8 @@ async function loadSubDistricts(districtCode) {
             `<option value="${s.code}">${s.name}</option>`;
 
     });
+    updateSelection();
+generateUrl();
 
 }
 
@@ -148,6 +152,8 @@ async function loadVillages(stateCode, subDistrictCode) {
             `<option value="${v.code}">${v.name}</option>`;
 
     });
+   updateSelection();
+generateUrl(); 
 
 }
 
@@ -337,9 +343,19 @@ function copyUrl() {
 
     }
 
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(url)
+.then(() => {
 
     alert("URL Copied");
+
+})
+.catch(error => {
+
+    console.error(error);
+
+    alert("Unable to copy URL");
+
+});
 
 }
 
