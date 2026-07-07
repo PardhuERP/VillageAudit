@@ -82,9 +82,9 @@ async function loadStates() {
 async function loadDistricts(stateCode) {
 
     const json = await api(
-        "getDistricts",
-        "&state=" + stateCode
-    );
+    "getDistricts",
+    "&state=" + encodeURIComponent(stateCode)
+);
 
     if (!json.status) return;
 
@@ -109,9 +109,9 @@ generateUrl();
 async function loadSubDistricts(districtCode) {
 
     const json = await api(
-        "getSubDistricts",
-        "&district=" + districtCode
-    );
+    "getSubDistricts",
+    "&district=" + encodeURIComponent(districtCode)
+);
 
     if (!json.status) return;
 
@@ -136,10 +136,10 @@ generateUrl();
 async function loadVillages(stateCode, subDistrictCode) {
 
     const json = await api(
-        "getVillages",
-        "&state=" + stateCode +
-        "&subdistrict=" + subDistrictCode
-    );
+    "getVillages",
+    "&state=" + encodeURIComponent(stateCode) +
+    "&subdistrict=" + encodeURIComponent(subDistrictCode)
+);
 
     if (!json.status) return;
 
