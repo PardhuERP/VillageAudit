@@ -262,6 +262,8 @@ function generateUrl() {
     url = url.replace("{VILLAGE}", village.value);
 
     document.getElementById("generatedUrl").value = url;
+    document.getElementById("reportStatus").innerHTML =
+    "🟢 Report URL Ready";
 
 }
 
@@ -384,16 +386,16 @@ function copyUrl() {
 
 function openReport() {
 
-    const url = document.getElementById("generatedUrl").value;
+    const url = document.getElementById("generatedUrl").value.trim();
 
-    if (!url) {
+    if (url === "") {
 
-        alert("Generate URL First");
+        alert("Please complete all selections and choose a report.");
 
         return;
 
     }
 
-    window.open(url, "_blank");
+    window.open(url, "_blank", "noopener");
 
 }
