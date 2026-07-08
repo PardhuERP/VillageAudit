@@ -380,7 +380,13 @@ gramPanchayat.addEventListener("change", function () {
 
 });
 
-report.addEventListener("change", generateUrl);
+report.addEventListener("change", function () {
+
+    updateUIByLevel();
+
+    generateUrl();
+
+});
 
 year.addEventListener("change", generateUrl);
 
