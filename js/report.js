@@ -206,10 +206,10 @@ function updateSelection() {
             ? subdistrict.options[subdistrict.selectedIndex].text
             : "-";
 
-    document.getElementById("selectedVillage").innerText =
-        village.selectedIndex > 0
-            ? village.options[village.selectedIndex].text
-            : "-";
+    document.getElementById("selectedGramPanchayat").innerText =
+    gramPanchayat.selectedIndex > 0
+        ? gramPanchayat.options[gramPanchayat.selectedIndex].text
+        : "-";
 
 }
 
