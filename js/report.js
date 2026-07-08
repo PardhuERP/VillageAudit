@@ -183,60 +183,6 @@ async function loadReports() {
 
 }
 
-function getSelectedReport() {
-
-    return reportTemplates.find(
-        r => String(r.id) === String(report.value)
-    );
-
-}
-
-
-function updateUIByLevel() {
-
-    const selected = getSelectedReport();
-
-    if (!selected) return;
-
-    const level = selected.level;
-
-    state.disabled = false;
-    district.disabled = false;
-    subdistrict.disabled = false;
-    gramPanchayat.disabled = false;
-
-    if (level === "INDIA") {
-
-        state.disabled = true;
-        district.disabled = true;
-        subdistrict.disabled = true;
-        gramPanchayat.disabled = true;
-
-    }
-
-    else if (level === "STATE") {
-
-        district.disabled = true;
-        subdistrict.disabled = true;
-        gramPanchayat.disabled = true;
-
-    }
-
-    else if (level === "DISTRICT") {
-
-        subdistrict.disabled = true;
-        gramPanchayat.disabled = true;
-
-    }
-
-    else if (level === "SUBDISTRICT") {
-
-        gramPanchayat.disabled = true;
-
-    }
-
-}
-
 // =======================================
 // SELECTED DETAILS
 // =======================================
@@ -380,13 +326,7 @@ gramPanchayat.addEventListener("change", function () {
 
 });
 
-report.addEventListener("change", function () {
-
-    updateUIByLevel();
-
-    generateUrl();
-
-});
+report.addEventListener("change", generateUrl);
 
 year.addEventListener("change", generateUrl);
 
