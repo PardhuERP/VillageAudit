@@ -183,6 +183,14 @@ async function loadReports() {
 
 }
 
+function getSelectedReport() {
+
+    return reportTemplates.find(
+        r => String(r.id) === String(report.value)
+    );
+
+}
+
 // =======================================
 // SELECTED DETAILS
 // =======================================
