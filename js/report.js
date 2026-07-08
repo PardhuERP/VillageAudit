@@ -143,13 +143,13 @@ async function loadVillages(stateCode, subDistrictCode) {
 
     if (!json.status) return;
 
-    village.innerHTML =
-        "<option value=''>Select Village</option>";
+   gramPanchayat.innerHTML =
+    "<option value=''>Select Gram Panchayat</option>"; 
 
     json.data.forEach(v => {
 
-        village.innerHTML +=
-            `<option value="${v.code}">${v.name}</option>`;
+        gramPanchayat.innerHTML +=
+    `<option value="${v.code}">${v.name}</option>`;
 
     });
    updateSelection();
