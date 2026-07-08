@@ -228,7 +228,7 @@ function generateUrl() {
     !state.value ||
     !district.value ||
     !subdistrict.value ||
-    !village.value ||
+    !gramPanchayat.value ||
     !reportId
 ) {
 
@@ -259,7 +259,7 @@ function generateUrl() {
     url = url.replace("{STATE}", state.value);
     url = url.replace("{DISTRICT}", district.value);
     url = url.replace("{SUBDISTRICT}", subdistrict.value);
-    url = url.replace("{VILLAGE}", village.value);
+    url = url.replace("{VILLAGE}", gramPanchayat.value);
 
     document.getElementById("generatedUrl").value = url;
     document.getElementById("reportStatus").innerHTML =
@@ -316,7 +316,7 @@ subdistrict.addEventListener("change", function () {
 });
 
 
-village.addEventListener("change", function () {
+gramPanchayat.addEventListener("change", function () {
 
     updateSelection();
 
