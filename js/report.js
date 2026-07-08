@@ -133,11 +133,12 @@ generateUrl();
 // VILLAGES
 // =======================================
 
-async function loadVillages(stateCode, subDistrictCode) {
+async function loadGramPanchayats(stateCode, districtCode, subDistrictCode) {
 
     const json = await api(
-    "getVillages",
+    "getGramPanchayats",
     "&state=" + encodeURIComponent(stateCode) +
+    "&district=" + encodeURIComponent(districtCode) +
     "&subdistrict=" + encodeURIComponent(subDistrictCode)
 );
 
@@ -259,7 +260,7 @@ function generateUrl() {
     url = url.replace("{STATE}", state.value);
     url = url.replace("{DISTRICT}", district.value);
     url = url.replace("{SUBDISTRICT}", subdistrict.value);
-    url = url.replace("{VILLAGE}", gramPanchayat.value);
+    url = url.replace("{GP_CODE}", gramPanchayat.value);
 
     document.getElementById("generatedUrl").value = url;
     document.getElementById("reportStatus").innerHTML =
