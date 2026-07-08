@@ -309,10 +309,11 @@ subdistrict.addEventListener("change", function () {
 
     if (!this.value) return;
 
-    loadVillages(
-        state.value,
-        this.value
-    );
+    loadGramPanchayats(
+    state.value,
+    district.value,
+    this.value
+);
 
 });
 
