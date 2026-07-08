@@ -277,7 +277,7 @@ state.addEventListener("change", function () {
 
     resetDistrict();
     resetSubDistrict();
-    resetVillage();
+    resetGramPanchayat();
 
     updateSelection();
 
@@ -290,7 +290,7 @@ state.addEventListener("change", function () {
 district.addEventListener("change", function () {
 
     resetSubDistrict();
-    resetVillage();
+    resetGramPanchayat();
 
     updateSelection();
 
@@ -302,7 +302,7 @@ district.addEventListener("change", function () {
 
 subdistrict.addEventListener("change", function () {
 
-    resetVillage();
+    resetGramPanchayat();
 
     updateSelection();
 
