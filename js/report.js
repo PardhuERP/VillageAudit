@@ -9,7 +9,7 @@ const year = document.getElementById("year");
 const state = document.getElementById("state");
 const district = document.getElementById("district");
 const subdistrict = document.getElementById("subdistrict");
-const village = document.getElementById("village");
+const gramPanchayat = document.getElementById("gramPanchayat");
 
 // =======================================
 // API
@@ -50,8 +50,8 @@ function resetSubDistrict() {
     subdistrict.innerHTML = "<option value=''>Select Sub District</option>";
 }
 
-function resetVillage() {
-    village.innerHTML = "<option value=''>Select Village</option>";
+function resetGramPanchayat() {
+    gramPanchayat.innerHTML = "<option value=''>Select Gram Panchayat</option>";
 }
 
 // =======================================
